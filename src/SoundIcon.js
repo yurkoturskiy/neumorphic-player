@@ -4,7 +4,7 @@ import "./styles.css";
 export default function App() {
   const [color] = useState("black");
   const [strokeWidth] = useState("2");
-  const [duration] = useState("800ms");
+  const [duration] = useState("680ms");
 
   return (
     <svg className="icon" viewBox="0 0 24 24">
