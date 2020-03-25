@@ -11,7 +11,7 @@ body {
   height: 270px;
 }
 
-.player-body {
+.player__body {
   width: 270px;
   height: 270px;
   background: #efeeee;
@@ -24,7 +24,7 @@ body {
   border-radius: 100%;
 }
 
-.icon-wrapper {
+.player__icon {
   /* z-index: 2; */
   position: absolute;
   top: 0;
@@ -37,7 +37,7 @@ body {
   pointer-events: none;
 }
 
-.glare {
+.glare.on {
   z-index: 2;
   stroke: #00eeffbd;
   filter: blur(28px);
@@ -46,15 +46,18 @@ body {
   stroke-width: 12px;
 }
 .light {
+  stroke: rgb(211, 211, 211);
+}
+.light.on {
   z-index: 4;
-  stroke: rgb(255, 255, 255);
+  /* stroke: rgb(255, 255, 255); */
   filter: blur(1px);
 }
 .light svg {
-  stroke-width: 0.25px;
+  stroke-width: 0.5px;
 }
 
-.button {
+.player__button {
   position: absolute;
   top: 0;
   right: 0;
@@ -73,7 +76,7 @@ body {
   border-radius: 100%;
 }
 
-.button:active {
+.player__button:active {
   box-shadow: 8px 8px 8px rgba(255, 255, 255, 0.5),
     -8px -8px 8px rgba(209, 209, 209, 0.2),
     inset -16px -16px 8px rgba(255, 255, 255, 0.25),
