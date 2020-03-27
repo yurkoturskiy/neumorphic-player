@@ -1,6 +1,7 @@
 body {
   /* background: rgba(235, 235, 235, 1); */
-  background: #e3e6ec;
+  background: #dfdcdc;
+  /* background: hsla(0, 4%, 90%, 1); */
 }
 
 .wrapper {
@@ -17,22 +18,24 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  filter: blur(2px);
+  filter: blur(1px);
   stroke: #f2feff;
   fill: none;
-  stroke-width: 0.1px;
-  width: 640px;
-  height: 640px;
+  stroke-width: 0.2px;
+  width: 430px;
+  height: 430px;
   z-index: 4;
   pointer-events: none;
-  transition: opacity 1s;
+  transition: opacity 0.6s, display 0.6s;
   opacity: 0;
+  /* display: none; */
 }
 .player__spinner.on {
-  opacity: 1;
+  opacity: 0.5;
+  /* display: block; */
 }
 
-.player__ring {
+.player__display {
   position: absolute;
   top: 0;
   right: 0;
@@ -40,23 +43,43 @@ body {
   left: 0;
   margin: auto;
   pointer-events: none;
+
+  transition: filter 0.4s, box-shadow 0.4s, background 0.4s;
+
+  width: 48px;
+  height: 48px;
   border-radius: 100%;
-  width: 90%;
-  height: 90%;
+  background: #d5d0d0;
+  box-shadow: 0px 0px 0px hsla(0, 0%, 98%, 1),
+    inset 0px 0px 0px hsla(189, 0%, 98%, 1),
+    inset 0px 0px 0px hsla(0, 0%, 100%, 1),
+    inset 1px 1px 4px hsla(0, 0%, 80%, 1),
+    inset -0.5px -0.5px 1px hsl(53, 7%, 87%);
+  filter: blur(1.2px);
+}
+
+.player__display.on {
+  background: hsla(0, 6%, 85%, 1);
+  box-shadow: 0px 0px 4px hsla(0, 0%, 98%, 1),
+    inset 0px 0px 8px hsla(189, 0%, 98%, 1),
+    inset 0px 0px 1px hsla(0, 0%, 100%, 1),
+    inset 0px 0px 0px hsla(0, 0%, 80%, 1), inset 0px 0px 0px hsl(53, 7%, 87%);
+  filter: blur(0px);
 }
 
 .player__body {
   width: 100%;
   height: 100%;
-  background: rgba(235, 235, 235, 1);
-  box-sizing: border-box;
-  border: 1px solid white;
-  filter: blur(1.4px);
-  box-shadow: 16px 16px 32px rgba(128, 128, 128, 0.32),
-    1px 1px 1px rgba(128, 128, 128, 0.2),
-    -16px -16px 32px rgba(255, 255, 255, 0.5),
-    inset 0px 0px 24px rgba(255, 255, 255, 0.4), inset 0px 0px 2px #ffffff;
-  border-radius: 100%;
+  background: #dfdcdc;
+  /* box-shadow: 16px 16px 32px #abaaaf, -16px -16px 32px hsla(33, 12%, 93%, 1), */
+  /*   1px 1px 2px #aea9be, inset 0px 0px 6px #f4f1f1, inset 0px 0px 1px #f3f3f2; */
+
+  box-shadow: 16px 16px 32px hsla(252, 3%, 70%, 1),
+    -16px -16px 32px hsla(33, 12%, 94%, 1), 1px 1px 2px #aea9be,
+    inset 0px 0px 6px #f4f1f1, inset 0px 0px 1px #f3f3f2;
+  transition: background 0.2s;
+  filter: blur(0.5px);
+  border-radius: 58px;
 }
 
 .sound-off-icon {
@@ -66,26 +89,34 @@ body {
   bottom: 0;
   left: 0;
   margin: auto;
-  width: 32px;
+
+  width: 24px;
+  height: 24px;
+}
+
+#sound-off-icon-path {
+  fill: var(--icon-color);
 }
 
 .icon {
   position: absolute;
+  z-index: 4;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   margin: auto;
-  stroke-width: 0.5px;
-  /* filter: blur(1.6px); */
-  stroke: #fff;
-  width: 42px;
+  stroke-width: 1.333px;
+  stroke: var(--icon-color);
+  width: 26px;
 }
 
 .player__icon {
   /* z-index: 2; */
   position: absolute;
-  filter: blur(1px);
+  --icon-color: #b1afba;
+  filter: blur(0.9px);
+  /* filter: blur(1px); */
   top: 0;
   right: 0;
   bottom: 0;
@@ -98,7 +129,6 @@ body {
   transition: opacity 0.6s;
   border-radius: 100%;
   stroke: #ccc;
-  background: rgba(200, 200, 200, 0.3);
 }
 
 .player__icon.on {
@@ -108,6 +138,20 @@ body {
   opacity: 1;
 }
 
+.player__glare {
+  z-index: 6;
+  position: absolute;
+  width: 3px;
+  height: 14px;
+  left: 65px;
+  top: 65px;
+  transition: opacity 0.2s;
+  background: #ffffff;
+  border-radius: 100%;
+  filter: blur(5px);
+  transform: rotate(35.07deg);
+}
+
 .player__button {
   position: absolute;
   top: 0;
@@ -115,26 +159,55 @@ body {
   bottom: 0;
   left: 0;
   margin: auto;
-  width: 128px;
-  height: 128px;
-  background: rgba(235, 235, 235, 1);
-  box-shadow: 8px 8px 8px hsla(230, 5%, 75%, 0.6),
-    -8px -8px 8px hsla(59, 100%, 99%, 1),
-    inset -16px -16px 16px hsla(230, 5%, 75%, 0.6),
-    inset 16px 16px 16px hsla(59, 100%, 99%, 1);
-  /* transition: box-shadow 0.05s; */
-  filter: blur(16px);
-  border-radius: 100%;
+
+  width: 118px;
+  height: 118px;
+  background: #dfdcdc;
+  /* box-shadow: 16px 16px 32px #c9c5c8, -16px -16px 32px #e2e0df, */
+  /*   inset -10px -10px 10px #c2bfc3, inset -16px -16px 32px #bfbbbe, */
+  /*   inset 16px 16px 32px #f8f8f6; */
+
+  box-shadow: 16px 16px 32px hsla(328, 4%, 81%, 1),
+    inset -10px -10px 32px hsla(299, 4%, 84%, 1),
+    inset -14px -14px 16px hsla(276, 5%, 67%, 1),
+    inset 16px 16px 20px hsla(60, 13%, 97%, 1);
+
+  /* box-shadow: 16px 16px 32px hsla(328, 4%, 81%, 1), */
+  /*   inset -6px -6px 16px hsla(299, 4%, 84%, 1), */
+  /*   inset -8px -8px 8px hsla(276, 5%, 67%, 1), */
+  /*   inset 8px 8px 16px hsla(60, 13%, 97%, 1); */
+  filter: blur(8px);
+  /* transition: box-shadow 0.2s, background 0.2s; */
+  /* filter: blur(9px); */
+  border-radius: 64px;
 }
+/* .player__button.on { */
+/*   background: hsla(188, 8%, 93%, 1); */
+/*   box-shadow: 16px 16px 32px hsla(328, 0%, 81%, 1), */
+/*     inset -10px -10px 32px hsla(183, 0%, 85%, 1), */
+/*     inset -14px -14px 16px hsla(0, 2%, 85%, 1), */
+/*     inset 16px 16px 20px hsla(60, 0%, 98%, 1); */
+/* } */
 
 .player__button:active {
-  box-shadow: 8px 8px 8px hsla(59, 100%, 99%, 1),
-    -8px -8px 8px hsla(230, 5%, 75%, 0.6),
-    inset -16px -16px 8px hsla(59, 100%, 99%, 1),
-    inset 16px 16px 16px hsla(230, 5%, 75%, 0.6);
+  box-shadow: 0px 0px 0px hsla(328, 4%, 81%, 1),
+    inset 10px 10px 32px hsla(299, 4%, 84%, 1),
+    inset 14px 14px 16px hsla(276, 5%, 70%, 1),
+    inset -16px -16px 20px hsla(60, 13%, 95%, 1);
+  /* box-shadow: 8px 8px 8px hsla(59, 100%, 99%, 1), */
+  /*   -8px -8px 8px hsla(230, 5%, 75%, 0.6), */
+  /*   inset -16px -16px 8px hsla(59, 100%, 99%, 1), */
+  /*   inset 16px 16px 16px hsla(230, 5%, 75%, 0.6); */
+}
+.player__button:active ~ .player__display {
+  transform: scale(0.96);
+  filter: blur(0.8px);
 }
 .player__button:active ~ .player__icon {
-  transform: scale(0.95);
-  background: rgba(200, 200, 200, 0.35);
+  transform: scale(0.96);
+  --icon-color: #aaa8b2;
   filter: blur(0.5px);
+}
+.player__button:active ~ .player__glare {
+  opacity: 0;
 }

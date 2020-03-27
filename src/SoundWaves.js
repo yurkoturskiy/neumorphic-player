@@ -62,7 +62,7 @@ function SoundWaves(props) {
         <path key={i} d={blob.dValuesFrames[0]}>
           <animate
             attributeName="d"
-            dur={`${getRandomArbitrary(1000, 1600)}ms`}
+            dur={`${getRandomArbitrary(1800, 2400)}ms`}
             repeatCount="indefinite"
             calcMode="linear"
             values={morphing(morphParams, pathParams).dValues}
@@ -71,7 +71,7 @@ function SoundWaves(props) {
             begin={props.shiftStep * i + "ms"}
             attributeName="stroke"
             values={animateColorValues}
-            dur={`${getRandomArbitrary(1000, 1600)}ms`}
+            dur={`${getRandomArbitrary(1800, 2400)}ms`}
             repeatCount="indefinite"
           />
         </path>

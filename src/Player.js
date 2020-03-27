@@ -1,25 +1,32 @@
 import React, { useState, useCallback } from "react";
-import { motion } from "framer-motion";
 import SoundIcon from "./SoundIcon";
 import MusicOffIcon from "./Icons/MusicOffIcon";
 import SoundWaves from "./SoundWaves";
+import LoFiSong from "./LoFiSong";
 
 function Player(props) {
   const [power, setPower] = useState();
-  const switcher = useCallback(() => setPower((power) => !power), []);
+  const switcher = useCallback(() => {
+    const lofiSongElement = document.getElementById("lofi-song");
+    lofiSongElement.muted = power;
+    lofiSongElement.play();
+    setPower(!power);
+  }, [power]);
   return (
     <div className="wrapper">
-      <div className={`player__body`} />
-      <div className={`player__button`} onClick={switcher} />
-      <div className="player__ring" />
+      <LoFiSong />
+      <div className={`player__body ${power && "on"}`} />
+      <div className={`player__button ${power && "on"}`} onClick={switcher} />
+      <div className={`player__display ${power && "on"}`} />
+      <div className="player__glare" />
       <SoundWaves
         className={`player__spinner ${power && "on"}`}
         duration={2000}
         shiftStep={200}
         numOfKeyPaths={3}
-        numOfShapes={9}
+        numOfShapes={5}
         colors={["#F3FFFE", "#FFF3FC", "#F7FFED", "#F3FFFE"]}
-        contrast={0.5}
+        contrast={0.35}
         round={1}
         numOfPathSegments={8}
         type={"fill"}
