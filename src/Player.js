@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from "react";
-import SoundIcon from "./SoundIcon";
-import MusicOffIcon from "./Icons/MusicOffIcon";
-import SoundWaves from "./SoundWaves";
-import LoFiSong from "./LoFiSong";
+import SoundIcon from "./components/SoundIcon";
+import MusicOffIcon from "./components/MusicOffIcon";
+import SoundWaves from "./components/SoundWaves";
+import LoFiSong from "./components/LoFiSong";
+import "./styles.css";
 
 function Player(props) {
   const [power, setPower] = useState();

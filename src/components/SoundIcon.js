@@ -5,7 +5,6 @@ import React, {
   useCallback,
   useReducer,
 } from "react";
-import "./styles.css";
 
 const init = (power) => ({
   animate: power,
