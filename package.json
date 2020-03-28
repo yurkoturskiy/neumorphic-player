@@ -6,6 +6,7 @@
   "main": "src/index.js",
   "dependencies": {
     "primitivo-svg": "^0.1.1-alpha.1",
+    "ramda": "^0.27.0",
     "react": "16.12.0",
     "react-dom": "16.12.0",
     "react-scripts": "3.0.1"
