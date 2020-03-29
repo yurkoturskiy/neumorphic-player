@@ -4,6 +4,7 @@ import MusicOffIcon from "./components/MusicOffIcon";
 import SoundWaves from "./components/SoundWaves";
 import LoFiSong from "./components/LoFiSong";
 import SpeakerGrid from "./components/SpeakerGrid";
+import VolumeButtons from "./components/VolumeButtons";
 import "./styles.css";
 
 function Player(props) {
@@ -41,6 +42,7 @@ function Player(props) {
       <div className={`player__icon ${!power && "off"}`}>
         <MusicOffIcon />
       </div>
+      <VolumeButtons updateVolume={updateVolume} />
     </div>
   );
 }

@@ -211,6 +211,57 @@ body {
 .player__button:active ~ .player__glare {
   opacity: 0;
 }
+
+.volume-button__wrapper {
+  position: absolute;
+}
+
+.volume-button__wrapper.plus {
+  right: 26px;
+  bottom: 24px;
+}
+
+.volume-button__wrapper.minus {
+  left: 26px;
+  bottom: 24px;
+}
+
+.volume-button__body {
+  width: 23px;
+  height: 23px;
+  background: #dfdcdc;
+  box-shadow: -3px -3px 4px hsla(25, 5%, 95%, 1),
+    3px 3px 5px hsla(328, 4%, 78%, 1), inset -1px -1px 2px hsla(299, 4%, 84%, 1),
+    inset -1px -1px 6px hsla(276, 5%, 70%, 1),
+    inset 4px 4px 4px hsla(60, 12%, 100%, 1);
+  filter: blur(6px);
+  border-radius: 64px;
+}
+
+.volume-button__body:active {
+  box-shadow: 3px 3px 4px hsla(25, 5%, 95%, 1),
+    -3px -3px 5px hsla(328, 4%, 78%, 1),
+    inset -1px -1px 2px hsla(299, 4%, 84%, 1),
+    inset 1px 1px 6px hsla(276, 5%, 70%, 1),
+    inset -4px -4px 4px hsla(60, 12%, 100%, 1);
+}
+
+.volume-button__body:active ~ .volume-button__wrapper img {
+  transform: scale(0.26);
+}
+
+.volume-button__wrapper img {
+  z-index: 6;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  width: 6px;
+  /* outline: 1px solid red; */
+}
+
 .speaker-grid {
   position: absolute;
   z-index: 6;
