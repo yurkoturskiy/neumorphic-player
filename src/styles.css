@@ -211,3 +211,11 @@ body {
 .player__button:active ~ .player__glare {
   opacity: 0;
 }
+.speaker-grid {
+  position: absolute;
+  z-index: 6;
+  left: 50%;
+  bottom: 21px;
+  transform: translateX(-50%);
+}
+

@@ -3,6 +3,7 @@ import SoundIcon from "./components/SoundIcon";
 import MusicOffIcon from "./components/MusicOffIcon";
 import SoundWaves from "./components/SoundWaves";
 import LoFiSong from "./components/LoFiSong";
+import SpeakerGrid from "./components/SpeakerGrid";
 import "./styles.css";
 
 function Player(props) {
@@ -19,6 +20,7 @@ function Player(props) {
       <div className={`player__body ${power && "on"}`} />
       <div className={`player__button ${power && "on"}`} onClick={switcher} />
       <div className={`player__display ${power && "on"}`} />
+      <SpeakerGrid />
       <div className="player__glare" />
       <SoundWaves
         className={`player__spinner ${power && "on"}`}
