@@ -14,6 +14,7 @@ const initialState = {
   power: false,
   volume: 1,
   volStep: 0.1,
+  volumeAction: null,
   element: undefined,
 };
 
@@ -25,6 +26,8 @@ const reducer = (state, action) => {
     case "TOGGLE_POWER":
       console.log("toggle", state);
       return toggleReducer(state);
+    case "SET_VOLUME_ACTION":
+      return { ...state, volumeAction: action.payload };
     case "UPDATE_VOLUME":
       return volumeReducer(state, action.payload);
     default:
@@ -41,11 +44,16 @@ function Player(props) {
   const onMount = useCallback(action("ON_MOUNT"), []);
   const togglePower = useCallback(action("TOGGLE_POWER"), []);
   const updateVolume = useCallback(action("UPDATE_VOLUME"), []);
+  const setVolumeAction = useCallback(action("SET_VOLUME_ACTION"), []);
 
   useEffect(() => {
     onMount();
   }, []);
 
+  useEffect(() => {
+    // Hold volume button effect
+    s.volumeAction && setTimeout(() => updateVolume(), 160);
+  }, [s.volume, s.volumeAction, updateVolume]);
   return (
     <div className="wrapper">
       <LoFiSong />
@@ -54,6 +62,9 @@ function Player(props) {
       <div
         className={`player__button ${s.power && "on"}`}
         onClick={togglePower}
+      <VolumeButtons
+        setVolumeAction={setVolumeAction}
+        updateVolume={updateVolume}
       />
       <div className={`player__display ${s.power && "on"}`} />
       <div className={`player__gradient ${s.power && "on"}`} />
@@ -77,7 +88,6 @@ function Player(props) {
       <div className={`player__icon ${!s.power && "off"}`}>
         <MusicOffIcon />
       </div>
-      <VolumeButtons updateVolume={updateVolume} />
     </div>
   );
 }
