@@ -14,6 +14,7 @@ const initialState = {
   power: false,
   volume: 1,
   volStep: 0.1,
+  outOfRangeValue: 0,
   volumeAction: null,
   element: undefined,
 };
@@ -21,15 +22,15 @@ const initialState = {
 const reducer = (state, action) => {
   switch (action.type) {
     case "ON_MOUNT":
-      console.log("mount");
       return setElement(state);
     case "TOGGLE_POWER":
-      console.log("toggle", state);
       return toggleReducer(state);
     case "SET_VOLUME_ACTION":
       return { ...state, volumeAction: action.payload };
     case "UPDATE_VOLUME":
       return volumeReducer(state, action.payload);
+    case "RESET_OUT_OF_RANGE_VALUE":
+      return { ...state, outOfRangeValue: 0 };
     default:
       return state;
   }
@@ -45,6 +46,10 @@ function Player(props) {
   const togglePower = useCallback(action("TOGGLE_POWER"), []);
   const updateVolume = useCallback(action("UPDATE_VOLUME"), []);
   const setVolumeAction = useCallback(action("SET_VOLUME_ACTION"), []);
+  const resetOutOfRangeValue = useCallback(
+    action("RESET_OUT_OF_RANGE_VALUE"),
+    []
+  );
 
   useEffect(() => {
     onMount();
@@ -54,6 +59,12 @@ function Player(props) {
     // Hold volume button effect
     s.volumeAction && setTimeout(() => updateVolume(), 160);
   }, [s.volume, s.volumeAction, updateVolume]);
+
+  useEffect(() => {
+    // reset out of range value with delay
+    s.outOfRangeValue && setTimeout(() => resetOutOfRangeValue(), 200);
+  }, [s.outOfRangeValue]);
+
   return (
     <div className="wrapper">
       <LoFiSong />
@@ -62,6 +73,12 @@ function Player(props) {
       <div
         className={`player__button ${s.power && "on"}`}
         onClick={togglePower}
+      <div
+        className={`display alarm ${s.power && "on"}`}
+        style={{
+          opacity: s.outOfRangeValue ? 1 : 0,
+        }}
+      />
       <VolumeButtons
         setVolumeAction={setVolumeAction}
         updateVolume={updateVolume}
