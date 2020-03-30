@@ -69,25 +69,36 @@ function Player(props) {
     <div className="wrapper">
       <LoFiSong />
       <SpeakerGrid />
-      <div className={`player__body ${s.power && "on"}`} />
+      <div className={`body ${s.power && "on"}`} />
+      <div className={`mute-button ${s.power && "on"}`} onClick={togglePower} />
+      <div className={`display glass ${s.power && "on"}`} />
+      <div className="glare" />
       <div
-        className={`player__button ${s.power && "on"}`}
-        onClick={togglePower}
+        className={`display gradient ${s.power && "on"}`}
+        style={{ opacity: s.power ? s.volume : 0 }}
+      />
+      <div
+        className={`display background ${s.power && "on"}`}
+        style={{ opacity: s.power ? s.volume : 0 }}
+      />
       <div
         className={`display alarm ${s.power && "on"}`}
         style={{
           opacity: s.outOfRangeValue ? 1 : 0,
         }}
       />
+      <div className={`display__icon ${s.power && "on"}`}>
+        <SoundIcon power={true} />
+      </div>
+      <div className={`display__icon ${!s.power && "off"}`}>
+        <MusicOffIcon />
+      </div>
       <VolumeButtons
         setVolumeAction={setVolumeAction}
         updateVolume={updateVolume}
       />
-      <div className={`player__display ${s.power && "on"}`} />
-      <div className={`player__gradient ${s.power && "on"}`} />
-      <div className="player__glare" />
       <SoundWaves
-        className={`player__spinner ${s.power && "on"}`}
+        className={`spinner ${s.power && "on"}`}
         duration={2000}
         shiftStep={200}
         numOfKeyPaths={3}
@@ -96,15 +107,9 @@ function Player(props) {
         contrast={0.35}
         round={1}
         numOfPathSegments={8}
-        type={"fill"}
+        type={"stroke"}
         lable={false}
       />
-      <div className={`player__icon ${s.power && "on"}`}>
-        <SoundIcon power={true} />
-      </div>
-      <div className={`player__icon ${!s.power && "off"}`}>
-        <MusicOffIcon />
-      </div>
     </div>
   );
 }
