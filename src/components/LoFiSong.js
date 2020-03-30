@@ -10,7 +10,7 @@ function LoFiSong() {
       id="lofi-song"
       muted
       loop
-      autoplay
+      autoPlay
       src="https://yurko-sandbox.s3.eu-central-1.amazonaws.com/LoFi.mp3"
     >
       Your browser does not support the
