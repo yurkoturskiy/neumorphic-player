@@ -1,30 +1,26 @@
-import { curry } from "ramda";
+import { pipe, curry } from "ramda";
 import setElement from "./setElement";
 
-const limitNumberWithinRange = curry((min, max, num) => {
-  console.log(min, max, num);
-  const MIN = min;
-  const MAX = max;
-  const parsed = num;
-  return Math.min(Math.max(parsed, MIN), MAX);
-});
-
+const limitNumberWithinRange = curry((min, max, num) =>
+  Math.min(Math.max(num, min), max)
+);
 const limitVolume = limitNumberWithinRange(0, 1);
 
-const up = (s) => {
-  const volume = limitVolume(s.volume + s.volStep);
-  console.log("volume", volume);
+const updateVolume = (s) => {
+  const step = s.volumeAction === "up" ? s.volStep : s.volStep * -1;
+  const value = s.volume + step;
+  const outOfRangeValue = value > 1 && s.outOfRangeValue + step;
+  const volume = limitVolume(value);
   s.element.volume = volume;
-  const lastVol = s.volume;
-  return { ...s, volume, lastVol };
+  s.element.play();
+  return { ...s, volume, outOfRangeValue };
 };
 
-const down = (s) => {
-  const volume = limitVolume(s.volume - s.volStep);
-  console.log("volume", volume);
-  s.element.volume = volume;
-  const lastVol = s.volume;
-  return { ...s, volume, lastVol };
+const checkPower = (s) => {
+  const power = s.volume >= 0.1;
+  s.element.muted = !power;
+  return { ...s, power: s.volume >= 0.1 };
 };
 
-export default (state, action) => (action === "up" ? up(state) : down(state));
+export default (state) =>
+  state.volumeAction ? pipe(updateVolume, checkPower)(state) : state;

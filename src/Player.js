@@ -12,8 +12,7 @@ import setElement from "./lib/setElement";
 
 const initialState = {
   power: false,
-  volume: 0,
-  lastVol: 1,
+  volume: 1,
   volStep: 0.1,
   element: undefined,
 };
