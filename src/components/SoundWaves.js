@@ -51,7 +51,16 @@ function SoundWaves(props) {
     ],
   };
 
-  const blob = useMemo(() => morphing(morphParams, pathParams), []);
+  const blobs = useMemo(
+    () =>
+      Array(props.numOfShapes)
+        .fill(null)
+        .map(() => ({
+          dur: `${getRandomArbitrary(1800, 2400)}ms`,
+          dValues: morphing(morphParams, pathParams).dValues,
+        })),
+    []
+  );
 
   const animateColorValues = props.colors.join(";");
   const animatePathDuration = props.duration + "ms";
@@ -59,19 +68,19 @@ function SoundWaves(props) {
   for (let i = 0; i < props.numOfShapes; i++) {
     paths.push(
       pathsVisibility[i] && (
-        <path key={i} d={blob.dValuesFrames[0]}>
+        <path key={i}>
           <animate
             attributeName="d"
-            dur={`${getRandomArbitrary(1800, 2400)}ms`}
+            dur={blobs[i].dur}
             repeatCount="indefinite"
             calcMode="linear"
-            values={morphing(morphParams, pathParams).dValues}
+            values={blobs[i].dValues}
           />
           <animate
             begin={props.shiftStep * i + "ms"}
             attributeName="stroke"
             values={animateColorValues}
-            dur={`${getRandomArbitrary(1800, 2400)}ms`}
+            dur={blobs[i].dur}
             repeatCount="indefinite"
           />
         </path>
