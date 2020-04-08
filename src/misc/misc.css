@@ -1,0 +1,17 @@
+#codesandbox-logo {
+  position: fixed;
+  right: 12px;
+  top: 12px;
+  height: 16px;
+  margin-right: var(--cards-margin);
+  color: #4b4b4b;
+  transform: scale(1.8) translateX(-50%);
+  transition: color 0.3s, box-shadow 0.3s, transform 0.3s;
+  padding: 2px;
+  border-radius: 4px;
+}
+#codesandbox-logo:hover {
+  color: #2b2b2b;
+  box-shadow: 0 0 6px 0 rgb(199, 199, 199);
+  transform: scale(1.9) translateX(-50%);
+}
