@@ -8,6 +8,7 @@ import LoFiSong from "./components/LoFiSong";
 import SpeakerGrid from "./components/SpeakerGrid";
 import VolumeButtons from "./components/VolumeButtons";
 import "./styles.css";
+import "./misc/misc.css";
 import setElement from "./lib/setElement";
 
 const initialState = {
