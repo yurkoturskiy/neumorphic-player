@@ -7,7 +7,7 @@ import Player from "./Player";
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <React.StrictMode>
-    {/* <CodeSandboxLogo /> */}
+    <CodeSandboxLogo />
     <Player />
   </React.StrictMode>,
   rootElement
