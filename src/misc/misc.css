@@ -19,3 +19,27 @@
   box-shadow: 0 0 6px 0 rgb(199, 199, 199);
   transform: scale(1.9);
 }
+
+.social-icon-wrapper {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  margin: 4px;
+}
+
+.social-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 16px;
+  transform: translate(-50%, -50%);
+}
+
+.social-icons-wrapper {
+  display: flex;
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+}
