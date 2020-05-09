@@ -249,6 +249,7 @@ img {
 
   filter: blur(8px);
   border-radius: 64px;
+  cursor: pointer;
 }
 
 .mute-button:active {
@@ -279,6 +280,7 @@ img {
 
 .volume-button__wrapper {
   position: absolute;
+  cursor: pointer;
 }
 
 .volume-button__wrapper.plus {
